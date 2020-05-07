@@ -13,7 +13,13 @@ The following repo fetches earthquakes data and stores the raw data and stores a
     MONGODB_PASSWORD=xxx
     MONGODB_IP_ADDRESS=111.111.111.111
   ```
+
 ## Run
 ```
   $ npm start
+```
+
+## Running docker
+```
+  docker build usgs-nodejs-data-fetch
 ```
