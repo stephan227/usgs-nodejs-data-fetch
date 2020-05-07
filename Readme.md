@@ -25,7 +25,7 @@ The following repo fetches earthquakes data and stores the raw data and stores a
     docker build -t usgs-nodejs-data-fetch .
   ```
 
-  Run docker image:
+  Create docker container:
   ```
-    docker run usgs-nodejs-data-fetch 
+    docker run -v $(pwd)/.env:/usr/src/app/.env --net mongodb-docker_default --name usgs-nodejs-data-fetch-container usgs-nodejs-data-fetch 
   ```

@@ -10,8 +10,8 @@ const fs = require('fs');
 const https = require('https');
 const BulkInsertEarthquakes = require('./mongodb/BulkInsertEarthquakes');
 
-// const requestURL = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2019-12-26&endtime=2020-01-16&catalog=pr'
-const requestURL = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&catalog=pr'
+// const requestURL = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2018-12-26&endtime=2020-05-16&catalog=pr&minmagnitude=0'
+const requestURL = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&catalog=pr&minmagnitude=0'
 https.get(requestURL, (resp) => {
   let data = '';
   
@@ -25,14 +25,18 @@ https.get(requestURL, (resp) => {
     if (!fs.existsSync(dir)){
         fs.mkdirSync(dir);
     }
-    
-    // Raw Data Save
+
+    // Save raw data locally
     fs.writeFile('./data-files/raw_earthquakes.geojson', data, () => {});
+    console.log('data length', JSON.parse(data).length)
 
     // Transform raw data
     const transformedData = transformEarthquakeData(JSON.parse(data));
+
+    // Save raw data to mongodb
     BulkInsertEarthquakes(transformedData);
-    // Save Transformed data
+
+    // Save Transformed data locally
     fs.writeFileSync('./data-files/transformed_earthquakes.json', JSON.stringify(transformedData))
 
   });
