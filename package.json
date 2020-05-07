@@ -1,0 +1,19 @@
+{
+  "name": "usgs-nodejs-data-fetch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "env $(cat .env) node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stephan227/usgs-nodejs-data-fetch.git"
+  },
+  "author": "stephan227",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^3.5.7"
+  }
+}
