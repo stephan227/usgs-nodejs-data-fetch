@@ -20,6 +20,12 @@ https.get(requestURL, (resp) => {
   });
 
   resp.on('end', () => {
+    var dir = './data-files';
+
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+    }
+    
     // Raw Data Save
     fs.writeFile('./data-files/raw_earthquakes.geojson', data, () => {});
 

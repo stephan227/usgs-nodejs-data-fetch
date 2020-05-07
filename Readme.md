@@ -14,12 +14,18 @@ The following repo fetches earthquakes data and stores the raw data and stores a
     MONGODB_IP_ADDRESS=111.111.111.111
   ```
 
-## Run
-```
-  $ npm start
-```
+## Running nodejs instance
+  ```
+    $ npm start
+  ```
 
-## Running docker
-```
-  docker build usgs-nodejs-data-fetch
-```
+## Running on docker
+  Create docker image:
+  ```
+    docker build -t usgs-nodejs-data-fetch .
+  ```
+
+  Run docker image:
+  ```
+    docker run usgs-nodejs-data-fetch 
+  ```
