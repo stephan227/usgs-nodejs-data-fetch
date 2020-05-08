@@ -51,7 +51,7 @@ const transformEarthquakeData = (usgsEarthquakes) => {
     const transformedData = usgsEarthquakes.features.map(feature => {
         const slimFeature = {
             mag: feature.properties.mag,
-            time: feature.properties.time,
+            time: new Date(feature.properties.time),
             tz: feature.properties.tz,
             location : {"type" : "Point" , "coordinates" : [feature.geometry.coordinates[0], feature.geometry.coordinates[1]]},
             depth: feature.geometry.coordinates[2],
