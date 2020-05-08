@@ -10,7 +10,7 @@ const fs = require('fs');
 const https = require('https');
 const BulkInsertEarthquakes = require('./mongodb/BulkInsertEarthquakes');
 
-// const requestURL = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2018-12-26&endtime=2020-05-16&catalog=pr&minmagnitude=0'
+// const requestURL = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2018-12-26&endtime=2020-07-16&catalog=pr&minmagnitude=0'
 const requestURL = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&catalog=pr&minmagnitude=0'
 https.get(requestURL, (resp) => {
   let data = '';
@@ -51,8 +51,8 @@ const transformEarthquakeData = (usgsEarthquakes) => {
     const transformedData = usgsEarthquakes.features.map(feature => {
         const slimFeature = {
             mag: feature.properties.mag,
-            utc_timestamp: feature.properties.time,
-            local_time: new Date(feature.properties.time + (feature.properties.tz * 1000)),
+            date: feature.properties.time,
+            tz: feature.properties.tz,
             location : {"type" : "Point" , "coordinates" : [feature.geometry.coordinates[0], feature.geometry.coordinates[1]]},
             depth: feature.geometry.coordinates[2],
             id: feature.id
